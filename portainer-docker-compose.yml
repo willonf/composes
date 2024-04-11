@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  portainer:
+    image: portainer/portainer-ee:latest
+    command: -H unix:///var/run/docker.sock
+    container_name: portainer
+    restart: always
+    ports:
+      - 9443:9443
+      - 8081:8000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+volumes:
+  portainer_data:
+
+networks:
+  default:
+    name: backend
